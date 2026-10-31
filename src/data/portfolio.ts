@@ -90,6 +90,13 @@ export const siteCopy = {
   heroPanelDescription: t(
     'Full-stack products, dependable systems, and AI-powered software built to ship.',
   ),
+  heroAnnounce: t('Open to new opportunities — building products end to end'),
+  heroAnnounceCta: t('Say hello'),
+  heroOpenToWork: t('Open to new opportunities'),
+  heroTagline: t('Full-stack developer | product engineer | AI engineer'),
+  localTime: t('Local time'),
+  indexTitle: t('Index'),
+  scroll: t('Scroll'),
   navigationLabel: t('Main navigation'),
   openNavigation: t('Open navigation menu'),
   closeNavigation: t('Close navigation menu'),
