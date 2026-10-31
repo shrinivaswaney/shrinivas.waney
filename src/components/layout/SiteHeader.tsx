@@ -1,6 +1,7 @@
 'use client';
 import { getLocalizedText, navigationLinks, profile, siteCopy } from '@/data/portfolio';
 import { useColorMode } from '@/providers/providers';
+import { MoonIcon, SunIcon } from '@phosphor-icons/react';
 import { AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import {
@@ -114,7 +115,11 @@ export function SiteHeader() {
         aria-pressed={colorMode === 'light'}
         onClick={() => colorMode !== 'light' && toggleColorMode()}
       >
-        Light
+        <SunIcon
+          size={20}
+          color={colorMode === 'dark' ? 'white' : 'white'}
+          weight={colorMode === 'dark' ? 'bold' : 'fill'}
+        />
       </ThemeOption>
       <ThemeOption
         type="button"
@@ -122,7 +127,11 @@ export function SiteHeader() {
         aria-pressed={colorMode === 'dark'}
         onClick={() => colorMode !== 'dark' && toggleColorMode()}
       >
-        Dark
+        <MoonIcon
+          size={20}
+          color={colorMode === 'dark' ? 'black' : 'black'}
+          weight={colorMode === 'dark' ? 'fill' : 'bold'}
+        />
       </ThemeOption>
     </ThemeToggle>
   );

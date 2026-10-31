@@ -29,11 +29,9 @@ const HeaderNav = styled.nav`
   margin: 0 auto;
   padding: 0 var(--page-gutter);
 
-  /* Mobile: brand | monogram (true center) | menu */
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   grid-template-areas: 'brand mono controls';
 
-  /* Tablet: brand | compact nav | controls (monogram hidden) */
   @media (min-width: 768px) {
     height: 64px;
     column-gap: 24px;
@@ -41,7 +39,6 @@ const HeaderNav = styled.nav`
     grid-template-areas: 'brand nav controls';
   }
 
-  /* Desktop: equal side columns keep the monogram exactly centered */
   @media (min-width: 1024px) {
     column-gap: 0;
     grid-template-columns:
