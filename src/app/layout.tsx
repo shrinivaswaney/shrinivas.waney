@@ -1,4 +1,5 @@
 import { CustomCursor } from '@/components/layout/Cursor';
+import { SiteHeader } from '@/components/layout/SiteHeader';
 import { getLocalizedText, profile, siteCopy } from '@/data/portfolio';
 import { Providers } from '@/providers/providers';
 import { StyledComponentsRegistry } from '@/providers/styled-components-registry';
@@ -55,11 +56,21 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${bigShouldersDisplay.variable}`}
+      suppressHydrationWarning
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "document.documentElement.dataset.theme = localStorage.getItem('color-mode') === 'light' ? 'light' : 'dark';",
+          }}
+        />
+      </head>
       <body className={`${geistSans.className} min-h-screen antialiased`}>
         <StyledComponentsRegistry>
           <Providers>
             <CustomCursor />
+            <SiteHeader />
             <Frame />
             <Suspense fallback={children}>
               <AntdRegistry>{children}</AntdRegistry>

@@ -93,6 +93,8 @@ export const siteCopy = {
   navigationLabel: t('Main navigation'),
   openNavigation: t('Open navigation menu'),
   closeNavigation: t('Close navigation menu'),
+  switchToLightMode: t('Switch to light mode'),
+  switchToDarkMode: t('Switch to dark mode'),
   homeLabel: t('Home'),
   skipToMain: t('Skip to main content'),
   exploreProjects: t('Explore projects'),
