@@ -84,7 +84,7 @@ export const SplitText: React.FC<{
         <span
           key={wordIndex}
           aria-hidden="true"
-          className="-mt-[0.14em] inline-block overflow-hidden whitespace-nowrap pb-[0.06em] pt-[0.14em] align-top"
+          className="mt-[-0.14em] inline-block overflow-hidden whitespace-nowrap pb-[0.06em] pt-[0.14em] align-top"
         >
           {Array.from(word).map((character, characterIndex) => (
             <span
