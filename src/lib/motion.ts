@@ -28,3 +28,38 @@ export const onIntroDone = (callback: () => void) => {
 };
 
 export const isIntroDone = () => introDone;
+
+/**
+ * Scroll velocity in pixels per frame (60fps), smoothed between calls.
+ *
+ * The target project does not run Lenis, so instead of reading its velocity we
+ * sample `window.scrollY` each time a ticker asks for it. The exponential
+ * smoothing makes the value decay back to zero when scrolling stops.
+ */
+let lastScrollY = 0;
+let lastSampleAt = 0;
+let scrollVelocity = 0;
+
+export const getScrollVelocity = () => {
+  if (typeof window === 'undefined') return 0;
+
+  const now = performance.now();
+  const y = window.scrollY;
+
+  if (lastSampleAt === 0) {
+    lastScrollY = y;
+    lastSampleAt = now;
+    return 0;
+  }
+
+  const elapsed = Math.max(now - lastSampleAt, 1);
+  const instant = ((y - lastScrollY) / elapsed) * (1000 / 60);
+
+  lastScrollY = y;
+  lastSampleAt = now;
+  scrollVelocity += (instant - scrollVelocity) * 0.2;
+
+  if (Math.abs(scrollVelocity) < 0.05) scrollVelocity = 0;
+
+  return scrollVelocity;
+};

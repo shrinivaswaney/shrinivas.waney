@@ -44,7 +44,7 @@ export const profile = {
   introduction: t(
     'I build full-stack products and AI-powered software that hold up in production.',
   ),
-  headline: [t('Building software'), t('that leaves an'), t('impact')],
+  headline: [t('Building'), t('software'), t('that leaves an impact')],
   location: t('Nagpur, India'),
   contactChannels: [
     {
@@ -97,6 +97,7 @@ export const siteCopy = {
   localTime: t('Local time'),
   indexTitle: t('Index'),
   scroll: t('Scroll'),
+  manifestoSub: t('Software, AI and cloud serving real-world operations.'),
   navigationLabel: t('Main navigation'),
   openNavigation: t('Open navigation menu'),
   closeNavigation: t('Close navigation menu'),
@@ -109,6 +110,12 @@ export const siteCopy = {
   downloadResume: t('Download resume'),
   backToTop: t('Back to top ↑'),
 } as const satisfies Record<string, LocalizedText>;
+
+export const manifestoWords: readonly LocalizedText[] = [
+  t('Automate'),
+  t('Integrate'),
+  t('Deploy'),
+];
 
 export type NavigationLink = {
   id: string;

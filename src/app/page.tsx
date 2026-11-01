@@ -1,9 +1,11 @@
 import { HeroSection } from '@/components/sections/HeroSection';
+import { ManifestoBand } from '@/components/sections/ManifestoBand';
 
 export default function Home() {
   return (
     <main id="main">
       <HeroSection />
+      <ManifestoBand />
     </main>
   );
 }
