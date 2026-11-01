@@ -5,7 +5,7 @@ import { getLocalizedText, navigationLinks, profile, siteCopy } from '@/data/por
 import { useLocalTime } from '@/hooks/useLocalTime';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { markIntroDone, onIntroDone } from '@/lib/motion';
-import { ArrowDownIcon, ArrowRight, ArrowRightIcon, StarIcon } from '@phosphor-icons/react';
+import { ArrowDownIcon, ArrowRightIcon, StarIcon } from '@phosphor-icons/react';
 import { gsap } from 'gsap';
 import React, { Suspense, lazy, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
@@ -149,7 +149,7 @@ export const HeroSection: React.FC = () => {
           <span className="hidden font-mono text-[10px] uppercase text-paper/55 sm:inline">
             {getLocalizedText(siteCopy.heroAnnounceCta)}
           </span>
-          <ArrowRight
+          <ArrowRightIcon
             className="h-3.5 w-3.5 text-paper/70 transition-transform group-hover:translate-x-0.5"
             aria-hidden="true"
           />
@@ -281,8 +281,8 @@ export const HeroSection: React.FC = () => {
               <img
                 src="/assets/logo/logo.png"
                 alt={name}
-                width="1584"
-                height="396"
+                width="999"
+                height="126"
                 loading="eager"
                 decoding="async"
                 className="hero-logo block h-auto w-full"
