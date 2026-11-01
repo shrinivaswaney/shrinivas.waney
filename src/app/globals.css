@@ -229,5 +229,24 @@ body {
       -webkit-text-stroke-width: 1.5px;
     }
   }
-}
 
+  /* Pixel image: the colour original is revealed in a circle from the pointer. */
+  .pixel-reveal {
+    --rx: 50%;
+    --ry: 50%;
+    clip-path: circle(0% at var(--rx) var(--ry));
+    transition: clip-path 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .group\/pixel:hover .pixel-reveal {
+    clip-path: circle(150% at var(--rx) var(--ry));
+  }
+
+  @media (hover: none) {
+    .group\/pixel[data-revealed='true'] .pixel-reveal {
+      clip-path: circle(150% at 50% 50%);
+      filter: grayscale(1) contrast(1.05);
+      transition-delay: 0.25s;
+    }
+  }
+}

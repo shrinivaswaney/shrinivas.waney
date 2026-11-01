@@ -2,8 +2,11 @@
 
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { onIntroDone } from '@/lib/motion';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
+
+gsap.registerPlugin(ScrollTrigger);
 
 type Tag = 'h1' | 'h2' | 'h3' | 'p' | 'span' | 'div';
 
@@ -103,21 +106,13 @@ export const SplitText: React.FC<{
  */
 export const useProximityWeight = <T extends HTMLElement>(
   ref: React.RefObject<T | null>,
-  {
-    min = 200,
-    max = 800,
-    radius = 260,
-  }: { min?: number; max?: number; radius?: number } = {},
+  { min = 200, max = 800, radius = 260 }: { min?: number; max?: number; radius?: number } = {},
 ) => {
   const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const element = ref.current;
-    if (
-      !element ||
-      prefersReducedMotion ||
-      window.matchMedia('(hover: none)').matches
-    ) {
+    if (!element || prefersReducedMotion || window.matchMedia('(hover: none)').matches) {
       return;
     }
 
@@ -148,8 +143,7 @@ export const useProximityWeight = <T extends HTMLElement>(
 
         const distance = Math.hypot(mouseX - point.x, mouseY - point.y);
         const proximity = Math.max(0, 1 - distance / radius);
-        const target =
-          min + (max - min) * proximity * proximity * (3 - 2 * proximity);
+        const target = min + (max - min) * proximity * proximity * (3 - 2 * proximity);
 
         weights[index] += (target - weights[index]) * 0.18;
         if (Math.abs(target - weights[index]) > 0.5) moving = true;
@@ -195,4 +189,48 @@ export const useProximityWeight = <T extends HTMLElement>(
       window.removeEventListener('resize', measure);
     };
   }, [ref, min, max, radius, prefersReducedMotion]);
+};
+
+/**
+ * Paragraph revealed word by word as it scrolls through the viewport.
+ */
+export const ScrollWords: React.FC<{ text: string; className?: string }> = ({
+  text,
+  className = '',
+}) => {
+  const ref = useRef<HTMLParagraphElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element || prefersReducedMotion) return;
+
+    const words = element.querySelectorAll('.word');
+    const tween = gsap.fromTo(
+      words,
+      { opacity: 0.38 },
+      {
+        opacity: 1,
+        stagger: 0.1,
+        ease: 'none',
+        // Fully revealed while still well in view (bottom of the block at 75% of the viewport)
+        scrollTrigger: { trigger: element, start: 'top 85%', end: 'bottom 75%', scrub: true },
+      },
+    );
+
+    return () => {
+      tween?.scrollTrigger?.kill();
+      tween?.kill();
+    };
+  }, [text, prefersReducedMotion]);
+
+  return (
+    <p ref={ref} className={className}>
+      {text.split(' ').map((word, index) => (
+        <span key={index} className="word">
+          {word}{' '}
+        </span>
+      ))}
+    </p>
+  );
 };
