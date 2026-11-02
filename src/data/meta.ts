@@ -95,6 +95,11 @@ export const siteCopy = {
   getInTouch: t('Get in touch'),
   downloadResume: t('Download resume'),
   backToTop: t('Back to top ↑'),
+  loading: t('Loading'),
+  notFoundTitle: t('This page is off the map.'),
+  notFoundText: t('The page you are looking for may have moved or no longer exists.'),
+  lostSignal: t('Lost signal'),
+  backHome: t('Back to home'),
 } as const satisfies Record<string, LocalizedText>;
 
 export const projectsSectionCopy = {

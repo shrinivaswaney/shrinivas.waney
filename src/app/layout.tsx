@@ -2,6 +2,7 @@ import { CustomCursor } from '@/components/layout/Cursor';
 import { Footer } from '@/components/layout/Footer';
 import { Frame } from '@/components/layout/Frame';
 import { HashScroll } from '@/components/layout/HashScroll';
+import { PageTransition } from '@/components/layout/PageTransition';
 import { SiteHeader } from '@/components/layout/SiteHeader';
 import { siteCopy } from '@/data/meta';
 import { getLocalizedText } from '@/data/portfolio';
@@ -76,7 +77,9 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
             <HashScroll />
             <SiteHeader />
             <Frame />
-            <AntdRegistry>{children}</AntdRegistry>
+            <AntdRegistry>
+              <PageTransition>{children}</PageTransition>
+            </AntdRegistry>
             <Footer />
           </Providers>
         </StyledComponentsRegistry>
