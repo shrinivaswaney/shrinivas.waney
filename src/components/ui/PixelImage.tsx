@@ -28,8 +28,8 @@ export const PixelImage: React.FC<{
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const revealOnHover = Boolean(original)
-      && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const revealOnHover =
+      Boolean(original) && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     const img = new Image();
     img.decoding = 'async';
     img.src = src;

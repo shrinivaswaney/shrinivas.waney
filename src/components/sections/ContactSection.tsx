@@ -175,14 +175,9 @@ export default function ContactSection() {
       <ContactContent>
         <ContactHeading data-contact-reveal>
           <ContactLabel>{getLocalizedText(siteCopy.contactKicker)}</ContactLabel>
-          <ContactTitle id="contact-title">
-            {getLocalizedText(siteCopy.contactTitle)}
-          </ContactTitle>
+          <ContactTitle id="contact-title">{getLocalizedText(siteCopy.contactTitle)}</ContactTitle>
           {email && (
-            <ContactEmail
-              href={email.href}
-              data-cursor={getLocalizedText(siteCopy.contactWrite)}
-            >
+            <ContactEmail href={email.href} data-cursor={getLocalizedText(siteCopy.contactWrite)}>
               <span>{email.value}</span>
               <ArrowUpRightIcon size={28} aria-hidden="true" />
             </ContactEmail>
@@ -192,9 +187,7 @@ export default function ContactSection() {
         <ContactGrid>
           <ContactInfo data-contact-reveal>
             <h3>{getLocalizedText(siteCopy.contactSubtitle)}</h3>
-            <ContactDescription>
-              {getLocalizedText(siteCopy.contactDescription)}
-            </ContactDescription>
+            <ContactDescription>{getLocalizedText(siteCopy.contactDescription)}</ContactDescription>
 
             <ContactList>
               {directChannels.map((channel) => {

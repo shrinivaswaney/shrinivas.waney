@@ -198,9 +198,7 @@ export const AboutSection: React.FC = () => {
             </MetaRow>
             <MetaRow>
               <MetaKey>{getLocalizedText(siteCopy.aboutRole)}</MetaKey>
-              <MetaValue>
-                {primaryRole ? getLocalizedText(primaryRole.role) : '—'}
-              </MetaValue>
+              <MetaValue>{primaryRole ? getLocalizedText(primaryRole.role) : '—'}</MetaValue>
             </MetaRow>
             <MetaRow>
               <MetaKey>{getLocalizedText(siteCopy.aboutAt)}</MetaKey>
