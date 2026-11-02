@@ -25,18 +25,6 @@ import {
   Chip,
   ChipRow,
   DownloadMeta,
-  ExperienceBlock,
-  ExperienceBody,
-  ExperienceChip,
-  ExperienceChips,
-  ExperienceCompany,
-  ExperienceItem,
-  ExperienceList,
-  ExperienceMain,
-  ExperienceMeta,
-  ExperienceNumber,
-  ExperienceRole,
-  ExperienceText,
   GhostLink,
   Header,
   ImpactBlock,
@@ -66,7 +54,6 @@ import {
   ProfileCard,
   ProfileKicker,
   ReadMoreBody,
-  ReadMoreSpacer,
   SectionLabelBar,
   SectionLabelCurrent,
   SectionLabelIndex,
@@ -105,7 +92,6 @@ const PILLARS = [
 
 export const AboutSection: React.FC = () => {
   const [showMore, setShowMore] = useState(false);
-  const [openExperience, setOpenExperience] = useState<Record<number, boolean>>({});
   const sectionRef = useRef<HTMLElement>(null);
   const prefersReducedMotion = useReducedMotion();
 
@@ -115,18 +101,7 @@ export const AboutSection: React.FC = () => {
     (max, section) => Math.max(max, 'index' in section ? section.index : 0),
     0,
   );
-  const readMoreLabel = getLocalizedText(siteCopy.readMore);
-  const readLessLabel = getLocalizedText(siteCopy.readLess);
-
   const primaryRole = experiences[0];
-  const roles = experiences.map((experience) => ({
-    id: experience.id,
-    period: getLocalizedText(experience.period),
-    title: getLocalizedText(experience.role),
-    company: getLocalizedText(experience.organization),
-    description: experience.highlights[0] ? getLocalizedText(experience.highlights[0]) : '',
-    highlights: experience.highlights.slice(1).map((highlight) => getLocalizedText(highlight)),
-  }));
   const skills = skillGroups.map((group) => ({
     id: group.id,
     title: getLocalizedText(group.category),
@@ -208,8 +183,8 @@ export const AboutSection: React.FC = () => {
               open={showMore}
               onClick={() => setShowMore((value) => !value)}
               controls="about-more"
-              label={readMoreLabel}
-              openLabel={readLessLabel}
+              label={getLocalizedText(siteCopy.readMore)}
+              openLabel={getLocalizedText(siteCopy.readLess)}
             />
           </IntroReadMore>
         </IntroColumn>
@@ -223,7 +198,9 @@ export const AboutSection: React.FC = () => {
             </MetaRow>
             <MetaRow>
               <MetaKey>{getLocalizedText(siteCopy.aboutRole)}</MetaKey>
-              <MetaValue>{primaryRole ? getLocalizedText(primaryRole.role) : '—'}</MetaValue>
+              <MetaValue>
+                {primaryRole ? getLocalizedText(primaryRole.role) : '—'}
+              </MetaValue>
             </MetaRow>
             <MetaRow>
               <MetaKey>{getLocalizedText(siteCopy.aboutAt)}</MetaKey>
@@ -308,59 +285,6 @@ export const AboutSection: React.FC = () => {
           </InterestList>
         </Interests>
       </SkillsBlock>
-
-      <ExperienceBlock>
-        <BlockHeader>
-          <BlockTitle>
-            <SplitText as="span" text={getLocalizedText(siteCopy.aboutExperience)} />
-          </BlockTitle>
-          <Kicker>{getLocalizedText(siteCopy.pathKicker)}</Kicker>
-        </BlockHeader>
-
-        <ExperienceList>
-          {roles.map((role, index) => (
-            <ExperienceItem key={role.id} data-reveal>
-              <ExperienceMeta>
-                <ExperienceNumber>#{index + 1}</ExperienceNumber> · {role.period}
-              </ExperienceMeta>
-              <ExperienceMain>
-                <ExperienceRole>{role.title}</ExperienceRole>
-                <ExperienceCompany>{role.company}</ExperienceCompany>
-              </ExperienceMain>
-              <ExperienceBody>
-                <Expandable
-                  id={`exp-${index}`}
-                  open={!!openExperience[index]}
-                  collapsed={firstLines(3)}
-                >
-                  <ExperienceText>{role.description}</ExperienceText>
-                  {role.highlights.length > 0 && (
-                    <ExperienceChips>
-                      {role.highlights.map((highlight) => (
-                        <ExperienceChip key={`${role.id}-${highlight}`}>{highlight}</ExperienceChip>
-                      ))}
-                    </ExperienceChips>
-                  )}
-                </Expandable>
-                <ReadMoreSpacer>
-                  <ExpandButton
-                    open={!!openExperience[index]}
-                    onClick={() =>
-                      setOpenExperience((current) => ({
-                        ...current,
-                        [index]: !current[index],
-                      }))
-                    }
-                    controls={`exp-${index}`}
-                    label={readMoreLabel}
-                    openLabel={readLessLabel}
-                  />
-                </ReadMoreSpacer>
-              </ExperienceBody>
-            </ExperienceItem>
-          ))}
-        </ExperienceList>
-      </ExperienceBlock>
 
       <ImpactBlock>
         <BlockHeader>

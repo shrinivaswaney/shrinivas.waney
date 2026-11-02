@@ -34,7 +34,7 @@ export function SiteHeader() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const prefersReducedMotion = useReducedMotion();
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode, setColorMode } = useColorMode();
   const email = profile.contactChannels.find((channel) => channel.id === 'email');
   const github = profile.contactChannels.find((channel) => channel.id === 'github');
   const linkedin = profile.contactChannels.find((channel) => channel.id === 'linkedin');
@@ -116,25 +116,19 @@ export function SiteHeader() {
         type="button"
         $active={colorMode === 'light'}
         aria-pressed={colorMode === 'light'}
-        onClick={() => colorMode !== 'light' && toggleColorMode()}
+        aria-label="Light mode"
+        onClick={() => colorMode !== 'light' && setColorMode('light')}
       >
-        <SunIcon
-          size={20}
-          color={colorMode === 'dark' ? 'white' : 'white'}
-          weight={colorMode === 'dark' ? 'bold' : 'fill'}
-        />
+        <SunIcon size={20} weight={colorMode === 'light' ? 'fill' : 'regular'} />
       </ThemeOption>
       <ThemeOption
         type="button"
         $active={colorMode === 'dark'}
         aria-pressed={colorMode === 'dark'}
-        onClick={() => colorMode !== 'dark' && toggleColorMode()}
+        aria-label="Dark mode"
+        onClick={() => colorMode !== 'dark' && setColorMode('dark')}
       >
-        <MoonIcon
-          size={20}
-          color={colorMode === 'dark' ? 'black' : 'black'}
-          weight={colorMode === 'dark' ? 'fill' : 'bold'}
-        />
+        <MoonIcon size={20} weight={colorMode === 'dark' ? 'fill' : 'regular'} />
       </ThemeOption>
     </ThemeToggle>
   );

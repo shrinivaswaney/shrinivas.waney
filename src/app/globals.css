@@ -99,6 +99,34 @@
   --color-error: #c4312c;
 }
 
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  animation: negative-reveal 0.9s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+@keyframes negative-reveal {
+  from {
+    clip-path: circle(0% at 50% 50%);
+    filter: invert(1);
+  }
+
+  to {
+    clip-path: circle(75% at 50% 50%);
+    filter: invert(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
 html {
   min-height: 100%;
   scroll-behavior: smooth;

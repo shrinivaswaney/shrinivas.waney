@@ -6,7 +6,7 @@ import { createContext, useContext, useMemo, useSyncExternalStore, type ReactNod
 type ColorMode = 'dark' | 'light';
 type ColorModeContextValue = {
   colorMode: ColorMode;
-  toggleColorMode: () => void;
+  setColorMode: (mode: ColorMode) => void;
 };
 
 const ColorModeContext = createContext<ColorModeContextValue | null>(null);
@@ -42,11 +42,20 @@ export function Providers({ children }: { children: ReactNode }) {
   const colorModeValue = useMemo(
     () => ({
       colorMode,
-      toggleColorMode: () => {
-        const nextMode = colorMode === 'dark' ? 'light' : 'dark';
-        document.documentElement.dataset.theme = nextMode;
-        window.localStorage.setItem('color-mode', nextMode);
-        window.dispatchEvent(new Event('color-mode-change'));
+      setColorMode: (mode: ColorMode) => {
+        const applyMode = () => {
+          const root = document.documentElement;
+          root.dataset.theme = mode;
+          window.localStorage.setItem('color-mode', mode);
+          window.dispatchEvent(new Event('color-mode-change'));
+        };
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (document.startViewTransition && !reducedMotion) {
+          document.startViewTransition(applyMode);
+        } else {
+          applyMode();
+        }
       },
     }),
     [colorMode],

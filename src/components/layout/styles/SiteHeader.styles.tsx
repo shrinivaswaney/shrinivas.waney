@@ -202,6 +202,10 @@ const ThemeToggle = styled.div<{ $inMenu?: boolean }>`
   line-height: 1;
   text-transform: uppercase;
 
+  > button {
+    min-width: 40px;
+  }
+
   @media (min-width: 768px) {
     display: ${({ $inMenu }) => ($inMenu ? 'none' : 'inline-flex')};
   }
