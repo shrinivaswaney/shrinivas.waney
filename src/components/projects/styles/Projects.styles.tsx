@@ -487,6 +487,10 @@ export const TechChip = styled.span`
 `;
 
 export const DetailActions = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
   margin-top: 1.5rem;
 `;
 

@@ -5,8 +5,29 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { onIntroDone } from '@/lib/motion';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { ScreenReaderOnly } from './ScreenReaderOnly';
+import styled from 'styled-components';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const WordClip = styled.span`
+  display: inline-block;
+  overflow: hidden;
+  padding-top: 0.14em;
+  padding-bottom: 0.06em;
+  margin-top: -0.14em;
+  vertical-align: top;
+  white-space: nowrap;
+`;
+
+const Character = styled.span`
+  display: inline-block;
+  will-change: transform;
+`;
+
+const WordSpace = styled.span`
+  display: inline-block;
+`;
 
 type Tag = 'h1' | 'h2' | 'h3' | 'p' | 'span' | 'div';
 
@@ -79,23 +100,16 @@ export const SplitText: React.FC<{
 
   return (
     <Tag ref={ref} className={className}>
-      <span className="sr-only">{text}</span>
+      <ScreenReaderOnly data-screen-reader-only="">{text}</ScreenReaderOnly>
       {words.map((word, wordIndex) => (
-        <span
-          key={wordIndex}
-          aria-hidden="true"
-          className="mt-[-0.14em] inline-block overflow-hidden whitespace-nowrap pb-[0.06em] pt-[0.14em] align-top"
-        >
+        <WordClip key={wordIndex} aria-hidden="true">
           {Array.from(word).map((character, characterIndex) => (
-            <span
-              key={characterIndex}
-              className={`char inline-block will-change-transform ${charClassName}`}
-            >
+            <Character key={characterIndex} className={`char ${charClassName}`}>
               {character}
-            </span>
+            </Character>
           ))}
-          {wordIndex < words.length - 1 && <span className="inline-block">&nbsp;</span>}
-        </span>
+          {wordIndex < words.length - 1 && <WordSpace>&nbsp;</WordSpace>}
+        </WordClip>
       ))}
     </Tag>
   );

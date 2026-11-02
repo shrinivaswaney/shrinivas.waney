@@ -166,6 +166,16 @@ export function ProjectIndex({ projects }: { projects: readonly Project[] }) {
                       ))}
                     </TechChips>
                     <DetailActions>
+                      {project.previewUrl && (
+                        <CodeLink
+                          href={project.previewUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {getLocalizedText(projectsPageCopy.livePreview)}
+                          <ArrowUpRightIcon size={14} aria-hidden="true" />
+                        </CodeLink>
+                      )}
                       {project.sourceUrl ? (
                         <CodeLink
                           href={project.sourceUrl}

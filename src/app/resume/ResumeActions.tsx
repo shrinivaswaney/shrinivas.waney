@@ -4,7 +4,8 @@ import { siteCopy } from '@/data/meta';
 import { getLocalizedText } from '@/data/portfolio';
 import { profile } from '@/data/profile';
 import { ArrowLeftIcon, DownloadSimpleIcon, PrinterIcon } from '@phosphor-icons/react';
-import Link from 'next/link';
+import { GhostButton, GhostButtonLink, SolidButtonAnchor } from '@/styles/Shared.styles';
+import { ResumeActionBar, ResumeActionGroup } from './Resume.styles';
 
 export function ResumeActions() {
   const printResume = () => {
@@ -27,22 +28,22 @@ export function ResumeActions() {
   };
 
   return (
-    <div className="resume-actions mb-8 flex flex-wrap items-center justify-between gap-4">
-      <Link href="/" className="btn-ghost">
+    <ResumeActionBar>
+      <GhostButtonLink href="/">
         <ArrowLeftIcon size={16} aria-hidden="true" />
         Back to website
-      </Link>
+      </GhostButtonLink>
 
-      <div className="flex flex-wrap gap-3">
-        <button type="button" onClick={printResume} className="btn-ghost">
+      <ResumeActionGroup>
+        <GhostButton type="button" onClick={printResume}>
           <PrinterIcon size={16} aria-hidden="true" />
           Print
-        </button>
-        <a href={profile.resumePath} download className="btn-solid">
+        </GhostButton>
+        <SolidButtonAnchor href={profile.resumePath} download>
           <DownloadSimpleIcon size={16} aria-hidden="true" />
           {getLocalizedText(siteCopy.downloadResume)}
-        </a>
-      </div>
-    </div>
+        </SolidButtonAnchor>
+      </ResumeActionGroup>
+    </ResumeActionBar>
   );
 }

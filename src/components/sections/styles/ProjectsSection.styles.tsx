@@ -179,6 +179,10 @@ export const MediaLink = styled(Link)`
   border: 1px solid var(--color-line);
   ${focusRing}
 
+  &:focus-visible .pixel-reveal {
+    clip-path: circle(150% at 50% 50%);
+  }
+
   @media ${GALLERY} {
     flex: 1 1 auto;
     min-height: 0;

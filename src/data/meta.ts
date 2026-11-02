@@ -136,6 +136,7 @@ export const projectsPageCopy = {
   overview: t('Overview'),
   highlights: t('Highlights'),
   technologiesLabel: t('Technologies'),
+  livePreview: t('Live preview'),
   viewCode: t('View source'),
   privateBuild: t('Private build'),
   showDetails: t('Show project details'),

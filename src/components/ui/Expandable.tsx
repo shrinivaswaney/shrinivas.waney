@@ -3,11 +3,71 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { ScreenReaderOnly } from './ScreenReaderOnly';
+import styled from 'styled-components';
+import { labelStyles } from '@/styles/Shared.styles';
 
 const MOBILE = '(max-width: 767px)';
 const PIXEL = 2; // taille d'un pixel de texte (px CSS)
 const FLIGHT = 520; // durée de la chute d'un pixel jusqu'à sa place (ms)
 const MAX_PIXELS = 9000;
+
+const ExpandableRoot = styled.div<{ $active: boolean }>`
+  position: relative;
+  ${({ $active }) => $active && 'overflow: hidden;'}
+`;
+
+const ExpandableInner = styled.div`
+  position: relative;
+`;
+
+const PixelCanvas = styled.canvas`
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  pointer-events: none;
+`;
+
+const PixelPlusRoot = styled.span`
+  position: relative;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+`;
+
+const PixelDot = styled.span`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 3px;
+  background: currentColor;
+  transition: transform 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+`;
+
+const ExpandButtonRoot = styled.button<{ $mobileOnly: boolean }>`
+  ${labelStyles}
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin: -0.25rem 0;
+  padding: 0.25rem 0;
+  color: var(--paper);
+
+  ${({ $mobileOnly }) =>
+    $mobileOnly &&
+    `
+      @media (min-width: 48rem) {
+        display: none;
+      }
+    `}
+`;
 
 const useActive = (mobileOnly: boolean) => {
   const [active, setActive] = useState(!mobileOnly);
@@ -70,7 +130,7 @@ const sampleWords = (el: HTMLElement, from: number, width: number, height: numbe
   let color = '';
   for (let node = walker.nextNode(); node; node = walker.nextNode()) {
     const parent = node.parentElement;
-    if (!parent || parent.closest('[aria-hidden="true"], .sr-only')) continue;
+    if (!parent || parent.closest('[aria-hidden="true"], [data-screen-reader-only]')) continue;
     const cs = getComputedStyle(parent);
     if (!color) color = cs.color;
     const fs = parseFloat(cs.fontSize);
@@ -331,16 +391,10 @@ export const Expandable: React.FC<{
   }, [open, active, reduce]);
 
   return (
-    <div ref={ref} id={id} className={`relative ${active ? 'overflow-hidden' : ''} ${className}`}>
-      <div ref={innerRef} className="relative">
-        {children}
-      </div>
-      <canvas
-        ref={canvasRef}
-        aria-hidden="true"
-        className="pointer-events-none absolute left-0 top-0 hidden"
-      />
-    </div>
+    <ExpandableRoot ref={ref} id={id} $active={active} className={className}>
+      <ExpandableInner ref={innerRef}>{children}</ExpandableInner>
+      <PixelCanvas ref={canvasRef} aria-hidden="true" />
+    </ExpandableRoot>
   );
 };
 
@@ -386,13 +440,12 @@ const PIXELS: { closed: [number, number]; open: [number, number] }[] = [
 ];
 
 const PixelPlus: React.FC<{ open: boolean }> = ({ open }) => (
-  <span aria-hidden="true" className="relative inline-block h-[15px] w-[15px] shrink-0">
+  <PixelPlusRoot aria-hidden="true">
     {PIXELS.map((p, i) => {
       const [x, y] = open ? p.open : p.closed;
       return (
-        <span
+        <PixelDot
           key={i}
-          className="absolute left-0 top-0 h-[3px] w-[3px] bg-current transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] motion-reduce:transition-none"
           style={{
             transform: `translate(${x * 3}px, ${y * 3}px)`,
             transitionDelay: `${i > 2 ? 80 : 0}ms`,
@@ -400,7 +453,7 @@ const PixelPlus: React.FC<{ open: boolean }> = ({ open }) => (
         />
       );
     })}
-  </span>
+  </PixelPlusRoot>
 );
 
 /** Bouton « Lire la suite » assorti : libellé décodé + pixels qui se réorganisent. */
@@ -415,16 +468,17 @@ export const ExpandButton: React.FC<{
 }> = ({ open, onClick, controls, label, openLabel, className = '', mobileOnly = true }) => {
   const text = open ? openLabel : label;
   return (
-    <button
+    <ExpandButtonRoot
       type="button"
       onClick={onClick}
       aria-expanded={open}
       aria-controls={controls}
-      className={`label group -my-1 inline-flex items-center gap-2.5 py-1 text-paper ${mobileOnly ? 'md:hidden' : ''} ${className}`}
+      $mobileOnly={mobileOnly}
+      className={className}
     >
       <PixelPlus open={open} />
-      <span className="sr-only">{text}</span>
+      <ScreenReaderOnly data-screen-reader-only="">{text}</ScreenReaderOnly>
       <Scramble text={text} />
-    </button>
+    </ExpandButtonRoot>
   );
 };

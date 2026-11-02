@@ -8,6 +8,7 @@ export type Project = {
   highlights: readonly LocalizedText[];
   sourceUrl?: string;
   previewImage?: string;
+  previewUrl?: string;
 };
 
 export const projects = [
@@ -42,6 +43,25 @@ export const projects = [
       t('Tracked sessions in MongoDB and deployed to Vercel with CI/CD.'),
     ],
     sourceUrl: 'https://github.com/shrinivaswaney22/aimpact',
-    previewImage: '/assets/hero/ray-burst-800.webp',
+    previewImage: '/projects/aimpact.png',
+    previewUrl: 'https://aimpact-tawny.vercel.app/',
+  },
+  {
+    id: 'polaris',
+    title: t('Polaris: Travel Planning Platform'),
+    summary: t(
+      'A travel marketplace for discovering curated itineraries from agencies and managing trip details in one place.',
+    ),
+    technologies: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'NextAuth', 'Tailwind CSS'],
+    highlights: [
+      t('Built itinerary discovery with featured trips, popular destinations, and search filters.'),
+      t('Implemented account registration with password hashing and NextAuth authentication.'),
+      t(
+        'Designed a relational data model for travelers, agencies, itineraries, bookings, payments, and reviews.',
+      ),
+    ],
+    sourceUrl: 'https://github.com/shrinivaswaney/polaris',
+    previewImage: '/projects/polaris.png',
+    previewUrl: '',
   },
 ] as const satisfies readonly Project[];

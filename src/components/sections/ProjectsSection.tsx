@@ -1,6 +1,7 @@
 'use client';
 
 import { SplitText } from '@/components/ui/Kinetic';
+import { ScreenReaderOnly } from '@/components/ui/ScreenReaderOnly';
 import { projectsPageCopy, projectsSectionCopy } from '@/data/meta';
 import { getLocalizedText } from '@/data/portfolio';
 import { projects, type Project } from '@/data/projects';
@@ -167,7 +168,12 @@ export const ProjectsSection: React.FC = () => {
               >
                 <MediaInner data-parallax>
                   {project.previewImage && (
-                    <MediaImage src={project.previewImage} alt={projectTitle} position="center" />
+                    <MediaImage
+                      src={project.previewImage}
+                      original={project.previewImage}
+                      alt={projectTitle}
+                      position="center"
+                    />
                   )}
                 </MediaInner>
               </MediaLink>
@@ -177,9 +183,9 @@ export const ProjectsSection: React.FC = () => {
                 <CardInfo>
                   <CardText>{projectSummary}</CardText>
                   <ChipRow>
-                    <h4 className="sr-only">
+                    <ScreenReaderOnly as="h4" data-screen-reader-only="">
                       {getLocalizedText(projectsPageCopy.technologiesLabel)}
-                    </h4>
+                    </ScreenReaderOnly>
                     {project.technologies.map((technology) => (
                       <Chip key={technology}>{technology}</Chip>
                     ))}
@@ -189,6 +195,16 @@ export const ProjectsSection: React.FC = () => {
                       {getLocalizedText(projectsSectionCopy.viewProject)}
                       <ArrowUpRightIcon size={13} aria-hidden="true" />
                     </SolidLink>
+                    {project.previewUrl && (
+                      <GhostLink
+                        href={project.previewUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {getLocalizedText(projectsPageCopy.livePreview)}
+                        <ArrowUpRightIcon size={13} aria-hidden="true" />
+                      </GhostLink>
+                    )}
                     {project.sourceUrl && (
                       <GhostLink href={project.sourceUrl} target="_blank" rel="noopener noreferrer">
                         <GithubLogoIcon size={14} aria-hidden="true" />

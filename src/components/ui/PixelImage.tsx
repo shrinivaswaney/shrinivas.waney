@@ -28,12 +28,14 @@ export const PixelImage: React.FC<{
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    const revealOnHover = Boolean(original)
+      && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     const img = new Image();
     img.decoding = 'async';
     img.src = src;
     const small = document.createElement('canvas');
     const sctx = small.getContext('2d');
-    let step = prefersReducedMotion ? STEPS.length - 1 : 0;
+    let step = revealOnHover ? 2 : prefersReducedMotion ? STEPS.length - 1 : 0;
     let timer = 0;
     let loaded = false;
     let played = false;
@@ -72,7 +74,7 @@ export const PixelImage: React.FC<{
     };
 
     const play = () => {
-      if (played) return;
+      if (played || revealOnHover) return;
       played = true;
       const next = () => {
         draw();
@@ -110,7 +112,7 @@ export const PixelImage: React.FC<{
       io.disconnect();
       ro.disconnect();
     };
-  }, [src, position, prefersReducedMotion]);
+  }, [src, original, position, prefersReducedMotion]);
 
   const setOrigin = (e: React.PointerEvent) => {
     const r = wrapRef.current?.getBoundingClientRect();

@@ -70,7 +70,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
           }}
         />
       </head>
-      <body className={`${geistSans.className} min-h-screen antialiased`}>
+      <body className={geistSans.className}>
         <StyledComponentsRegistry>
           <Providers>
             <CustomCursor />
