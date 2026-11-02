@@ -162,6 +162,7 @@ export const ProjectsSection: React.FC = () => {
 
               <MediaLink
                 href={href}
+                data-cursor={getLocalizedText(projectsSectionCopy.viewProject)}
                 aria-label={`${getLocalizedText(projectsSectionCopy.viewProject)} — ${projectTitle}`}
               >
                 <MediaInner data-parallax>
@@ -201,7 +202,7 @@ export const ProjectsSection: React.FC = () => {
           );
         })}
 
-        <AllLink href="/projects">
+        <AllLink href="/projects" data-cursor={getLocalizedText(projectsSectionCopy.viewAll)}>
           <AllMeta>
             {getLocalizedText(projectsPageCopy.allProjects)} · {total}
           </AllMeta>

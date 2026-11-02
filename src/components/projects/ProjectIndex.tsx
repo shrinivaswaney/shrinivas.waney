@@ -112,6 +112,7 @@ export function ProjectIndex({ projects }: { projects: readonly Project[] }) {
             <IndexItem key={project.id} id={project.id}>
               <RowButton
                 type="button"
+                data-cursor="View"
                 aria-expanded={isOpen}
                 aria-controls={detailsId}
                 aria-label={`${getLocalizedText(
