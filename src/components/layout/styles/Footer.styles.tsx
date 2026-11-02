@@ -184,7 +184,9 @@ export const LinkList = styled.ul`
 `;
 
 const linkStyles = css`
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   margin-block: -0.25rem;
   padding-block: 0.25rem;
   font-family: var(--font-mono);
@@ -210,6 +212,9 @@ export const ExternalLink = styled.a`
 `;
 
 export const LocationName = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-family: var(--font-mono);
   font-size: 12px;
   letter-spacing: 0.08em;
@@ -218,6 +223,9 @@ export const LocationName = styled.span`
 `;
 
 export const Coordinates = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-family: var(--font-mono);
   font-size: 12px;
   letter-spacing: 0.08em;

@@ -1,14 +1,14 @@
+import { professionalDevelopment } from '@/data/certifications';
+import { education } from '@/data/education';
+import { experiences } from '@/data/experience';
+import { impactStatements } from '@/data/meta';
+import { getLocalizedText } from '@/data/portfolio';
 import { profile } from '@/data/profile';
+import { aboutInterests } from '@/data/sectionsMeta';
+import { skillGroups } from '@/data/skills';
 import type { Metadata } from 'next';
 import { ResumeActions } from './ResumeActions';
-import { ResumeContactIcon } from './ResumeContactIcon';
-import { getLocalizedText } from '@/data/portfolio';
-import { experiences } from '@/data/experience';
-import { education } from '@/data/education';
-import { skillGroups } from '@/data/skills';
-import { impactStatements } from '@/data/meta';
-import { professionalDevelopment } from '@/data/certifications';
-import { aboutInterests } from '@/data/sectionsMeta';
+import { SocialIcon } from './SocialIcons';
 
 export const metadata: Metadata = {
   title: 'Resume | Shrinivas Waney',
@@ -58,7 +58,7 @@ export default function ResumePage() {
                       className="text-paper/80 transition-colors hover:text-paper"
                     >
                       <span className="inline-flex items-center gap-2">
-                        <ResumeContactIcon name={channel.id} />
+                        <SocialIcon name={channel.id} />
                         {getLocalizedText(channel.label)}: {channel.value}
                       </span>
                     </a>
@@ -66,7 +66,7 @@ export default function ResumePage() {
                 );
               })}
               <li className="text-paper/80 flex items-center gap-2">
-                <ResumeContactIcon name="location" /> Location: {getLocalizedText(profile.location)}
+                <SocialIcon name="location" /> Location: {getLocalizedText(profile.location)}
               </li>
             </ul>
           </header>

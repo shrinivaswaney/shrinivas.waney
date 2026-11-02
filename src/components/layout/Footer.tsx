@@ -1,13 +1,20 @@
 'use client';
 
+import { SocialIcon } from '@/app/resume/SocialIcons';
 import { useProximityWeight } from '@/components/ui/Kinetic';
 import { siteCopy } from '@/data/meta';
 import { navigationLinks } from '@/data/nav';
-import { getLocalizedText } from '@/data/portfolio';
+import { getLocalizedText, t } from '@/data/portfolio';
 import { profile } from '@/data/profile';
 import { projects } from '@/data/projects';
 import { aboutInterests } from '@/data/sectionsMeta';
-import { ArrowUpIcon } from '@phosphor-icons/react';
+import {
+  ArrowUpIcon,
+  CompassRoseIcon,
+  DownloadSimpleIcon,
+  EyeIcon,
+  MapPinIcon,
+} from '@phosphor-icons/react';
 import { useRef, type ReactNode } from 'react';
 import {
   ArtBand,
@@ -144,7 +151,7 @@ export function Footer() {
                   ? {}
                   : { target: '_blank', rel: 'noopener noreferrer' })}
               >
-                {getLocalizedText(channel.label)} ↗
+                <SocialIcon name={channel.id} /> {getLocalizedText(channel.label)} ↗
               </ExternalLink>
             </li>
           ))}
@@ -152,17 +159,23 @@ export function Footer() {
 
         <ColumnShell index={4} title="Location" label="Location and resume">
           <li>
-            <LocationName>{getLocalizedText(profile.location)}</LocationName>
+            <LocationName>
+              <MapPinIcon size={16} /> {getLocalizedText(profile.location)}
+            </LocationName>
           </li>
           <li>
-            <Coordinates>21.15°N · 79.09°E</Coordinates>
+            <Coordinates>
+              <CompassRoseIcon size={16} /> {getLocalizedText(t('21.15°N · 79.09°E'))}
+            </Coordinates>
           </li>
           <li>
-            <InternalLink href="/resume">{getLocalizedText(siteCopy.viewResume)}</InternalLink>
+            <InternalLink href="/resume">
+              <EyeIcon size={16} /> {getLocalizedText(siteCopy.viewResume)}
+            </InternalLink>
           </li>
           <li>
             <ExternalLink href={profile.resumePath} download>
-              {getLocalizedText(siteCopy.downloadResume)}
+              <DownloadSimpleIcon size={16} /> {getLocalizedText(siteCopy.downloadResume)}
             </ExternalLink>
           </li>
         </ColumnShell>
@@ -174,7 +187,8 @@ export function Footer() {
             © {currentYear} {name}. All rights reserved.
           </Copyright>
           <Credits>
-            Design &amp; code — {name} · Big Shoulders Display, Geist · Next.js, GSAP
+            Design &amp; code — {name} · Big Shoulders Display, Geist · Next.js, GSAP, Ant Design,
+            Styled Components, Phosphor Icons.
           </Credits>
         </BottomInfo>
         <BackToTop
