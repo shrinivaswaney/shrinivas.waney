@@ -1,9 +1,11 @@
 import { CustomCursor } from '@/components/layout/Cursor';
+import { Frame } from '@/components/layout/Frame';
 import { SiteHeader } from '@/components/layout/SiteHeader';
-import { getLocalizedText, profile, siteCopy } from '@/data/portfolio';
+import { siteCopy } from '@/data/meta';
+import { getLocalizedText } from '@/data/portfolio';
+import { profile } from '@/data/profile';
 import { Providers } from '@/providers/providers';
 import { StyledComponentsRegistry } from '@/providers/styled-components-registry';
-import { Frame } from '@/components/layout/Frame';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import type { Metadata, Viewport } from 'next';
 import { Big_Shoulders, Geist, Geist_Mono } from 'next/font/google';

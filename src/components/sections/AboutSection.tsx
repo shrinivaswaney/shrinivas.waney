@@ -2,17 +2,13 @@
 
 import { Expandable, ExpandButton } from '@/components/ui/Expandable';
 import { SplitText } from '@/components/ui/Kinetic';
-import {
-  aboutInterests,
-  education,
-  experiences,
-  getLocalizedText,
-  impactStatements,
-  profile,
-  sections,
-  siteCopy,
-  skillGroups,
-} from '@/data/portfolio';
+import { education } from '@/data/education';
+import { experiences } from '@/data/experience';
+import { impactStatements, siteCopy } from '@/data/meta';
+import { getLocalizedText } from '@/data/portfolio';
+import { profile } from '@/data/profile';
+import { aboutInterests, sections } from '@/data/sectionsMeta';
+import { skillGroups } from '@/data/skills';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { firstLines } from '@/lib/collapse';
 import { ArrowRightIcon, DownloadSimpleIcon } from '@phosphor-icons/react';
@@ -58,8 +54,8 @@ import {
   ImpactText,
   InterestItem,
   InterestList,
-  InterestSeparator,
   Interests,
+  InterestSeparator,
   InterestsKicker,
   IntroColumn,
   IntroGrid,
@@ -249,7 +245,7 @@ export const AboutSection: React.FC = () => {
             </MetaRow>
 
             <ActionGrid>
-              <SolidLink href={profile.resumePath} target="_blank" rel="noreferrer">
+              <SolidLink href="/resume">
                 {getLocalizedText(siteCopy.viewResume)}
                 <ArrowRightIcon size={14} aria-hidden="true" />
               </SolidLink>

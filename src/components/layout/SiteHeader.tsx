@@ -1,5 +1,8 @@
 'use client';
-import { getLocalizedText, navigationLinks, profile, siteCopy } from '@/data/portfolio';
+import { siteCopy } from '@/data/meta';
+import { navigationLinks } from '@/data/nav';
+import { getLocalizedText } from '@/data/portfolio';
+import { profile } from '@/data/profile';
 import { useColorMode } from '@/providers/providers';
 import { MoonIcon, SunIcon } from '@phosphor-icons/react';
 import { AnimatePresence, useReducedMotion } from 'framer-motion';

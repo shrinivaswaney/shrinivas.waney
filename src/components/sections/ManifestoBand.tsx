@@ -1,6 +1,7 @@
 'use client';
-
-import { getLocalizedText, manifestoWords, siteCopy } from '@/data/portfolio';
+import { siteCopy } from '@/data/meta';
+import { getLocalizedText } from '@/data/portfolio';
+import { manifestoWords } from '@/data/sectionsMeta';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { getScrollVelocity } from '@/lib/motion';
 import { gsap } from 'gsap';

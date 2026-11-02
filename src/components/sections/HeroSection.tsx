@@ -1,7 +1,10 @@
 'use client';
 
 import { SplitText, useProximityWeight } from '@/components/ui/Kinetic';
-import { getLocalizedText, navigationLinks, profile, siteCopy } from '@/data/portfolio';
+import { siteCopy } from '@/data/meta';
+import { navigationLinks } from '@/data/nav';
+import { getLocalizedText } from '@/data/portfolio';
+import { profile } from '@/data/profile';
 import { useLocalTime } from '@/hooks/useLocalTime';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { markIntroDone, onIntroDone } from '@/lib/motion';

@@ -181,11 +181,7 @@ const parseHexColor = (value: string): [number, number, number] | null => {
       : match[1];
   const parsed = Number.parseInt(raw, 16);
 
-  return [
-    ((parsed >> 16) & 255) / 255,
-    ((parsed >> 8) & 255) / 255,
-    (parsed & 255) / 255,
-  ];
+  return [((parsed >> 16) & 255) / 255, ((parsed >> 8) & 255) / 255, (parsed & 255) / 255];
 };
 
 const readPalette = () => {
@@ -271,11 +267,7 @@ const DitherHero: React.FC<{
 
       const buffer = gl.createBuffer();
       gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-      gl.bufferData(
-        gl.ARRAY_BUFFER,
-        new Float32Array([-1, -1, 3, -1, -1, 3]),
-        gl.STATIC_DRAW,
-      );
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
 
       const location = gl.getAttribLocation(program, 'position');
       gl.enableVertexAttribArray(location);
@@ -333,17 +325,12 @@ const DitherHero: React.FC<{
         values.uRes = [canvas.width, canvas.height];
 
         values.uFocus = [0, 0, 0];
-        const marker = wrap.parentElement?.querySelector<HTMLElement>(
-          '[data-sphere-bottom]',
-        );
+        const marker = wrap.parentElement?.querySelector<HTMLElement>('[data-sphere-bottom]');
 
         if (!centered && marker && width / height < 1.2) {
           const bandTop = 16;
           const band =
-            marker.getBoundingClientRect().top -
-            wrap.getBoundingClientRect().top -
-            12 -
-            bandTop;
+            marker.getBoundingClientRect().top - wrap.getBoundingClientRect().top - 12 - bandTop;
 
           if (band > 90) {
             const minimum = Math.min(width, height);
@@ -394,9 +381,7 @@ const DitherHero: React.FC<{
       intersectionObserver.observe(wrap);
 
       const scrollRatio = () =>
-        scrollLinked
-          ? Math.min(1, Math.max(0, window.scrollY / (wrap.offsetHeight || 1)))
-          : 0;
+        scrollLinked ? Math.min(1, Math.max(0, window.scrollY / (wrap.offsetHeight || 1))) : 0;
 
       const applyPalette = () => {
         const next = readPalette();
