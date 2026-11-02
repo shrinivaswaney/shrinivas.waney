@@ -7,6 +7,7 @@ export type Project = {
   technologies: readonly string[];
   highlights: readonly LocalizedText[];
   sourceUrl?: string;
+  previewImage?: string;
 };
 
 export const projects = [
@@ -26,6 +27,7 @@ export const projects = [
       ),
       t('Added idempotent CSV ingestion and LLM-powered expense categorization.'),
     ],
+    previewImage: '/assets/art/globe-halftone.png',
   },
   {
     id: 'aimpact',
@@ -40,5 +42,6 @@ export const projects = [
       t('Tracked sessions in MongoDB and deployed to Vercel with CI/CD.'),
     ],
     sourceUrl: 'https://github.com/shrinivaswaney22/aimpact',
+    previewImage: '/assets/hero/ray-burst-800.webp',
   },
 ] as const satisfies readonly Project[];

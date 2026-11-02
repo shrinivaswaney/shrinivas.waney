@@ -148,7 +148,7 @@ export function SiteHeader() {
           </Brand>
           <NavList $side="left">{renderLinks(navigationLinks.slice(0, 2), true)}</NavList>
           <Monogram
-            href="#top"
+            href="/"
             aria-label={`${profile.initials} — ${getLocalizedText(siteCopy.homeLabel)}`}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >

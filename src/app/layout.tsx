@@ -1,5 +1,7 @@
 import { CustomCursor } from '@/components/layout/Cursor';
+import { Footer } from '@/components/layout/Footer';
 import { Frame } from '@/components/layout/Frame';
+import { HashScroll } from '@/components/layout/HashScroll';
 import { SiteHeader } from '@/components/layout/SiteHeader';
 import { siteCopy } from '@/data/meta';
 import { getLocalizedText } from '@/data/portfolio';
@@ -9,7 +11,6 @@ import { StyledComponentsRegistry } from '@/providers/styled-components-registry
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import type { Metadata, Viewport } from 'next';
 import { Big_Shoulders, Geist, Geist_Mono } from 'next/font/google';
-import { Suspense } from 'react';
 import './globals.css';
 
 const geistSans = Geist({
@@ -72,11 +73,11 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
         <StyledComponentsRegistry>
           <Providers>
             <CustomCursor />
+            <HashScroll />
             <SiteHeader />
             <Frame />
-            <Suspense fallback={children}>
-              <AntdRegistry>{children}</AntdRegistry>
-            </Suspense>
+            <AntdRegistry>{children}</AntdRegistry>
+            <Footer />
           </Providers>
         </StyledComponentsRegistry>
       </body>

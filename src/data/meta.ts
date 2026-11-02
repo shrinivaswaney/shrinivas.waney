@@ -68,6 +68,46 @@ export const siteCopy = {
   backToTop: t('Back to top ↑'),
 } as const satisfies Record<string, LocalizedText>;
 
+export const projectsSectionCopy = {
+  kicker: t('Selected work'),
+  lead: t(
+    'A short index of shipped work: financial systems, AI products and the services that keep them running.',
+  ),
+  caseStudy: t('Case study'),
+  viewProject: t('View project'),
+  viewAll: t('View all projects'),
+  scrollHint: t('Scroll'),
+} as const satisfies Record<string, LocalizedText>;
+
+export const projectsPageCopy = {
+  kicker: t('Work'),
+  allProjects: t('All projects'),
+  description: t(
+    'Selected full-stack and AI projects by Shrinivas Waney. Explore the stack, technical decisions and shipped outcomes.',
+  ),
+  backHome: t('Back home'),
+  githubProfile: t('GitHub profile'),
+  caseStudies: t('Case studies'),
+  technologies: t('Technologies'),
+  search: t('Search'),
+  searchPlaceholder: t('Name, stack, keyword…'),
+  clearSearch: t('Clear search'),
+  filterStack: t('Stack'),
+  all: t('All'),
+  noResults: t('No results'),
+  noResultsHint: t('Try another term or stack'),
+  colProject: t('Project'),
+  colStack: t('Stack'),
+  colHighlights: t('Highlights'),
+  overview: t('Overview'),
+  highlights: t('Highlights'),
+  technologiesLabel: t('Technologies'),
+  viewCode: t('View source'),
+  privateBuild: t('Private build'),
+  showDetails: t('Show project details'),
+  hideDetails: t('Hide project details'),
+} as const satisfies Record<string, LocalizedText>;
+
 export const impactStatements: readonly LocalizedText[] = [
   t('Shipped 35+ pull requests across a multi-repository carbon-accounting platform.'),
   t('Closed 110+ Jira tickets from specification to merge.'),
