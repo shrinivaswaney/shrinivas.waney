@@ -2,7 +2,6 @@
 
 import { Expandable, ExpandButton } from '@/components/ui/Expandable';
 import { SplitText } from '@/components/ui/Kinetic';
-import { education } from '@/data/education';
 import { experiences } from '@/data/experience';
 import { impactStatements, siteCopy } from '@/data/meta';
 import { getLocalizedText } from '@/data/portfolio';
@@ -26,13 +25,6 @@ import {
   Chip,
   ChipRow,
   DownloadMeta,
-  EducationItem,
-  EducationKicker,
-  EducationList,
-  EducationLocation,
-  EducationPeriod,
-  EducationPlace,
-  EducationProgram,
   ExperienceBlock,
   ExperienceBody,
   ExperienceChip,
@@ -368,18 +360,6 @@ export const AboutSection: React.FC = () => {
             </ExperienceItem>
           ))}
         </ExperienceList>
-
-        <EducationKicker>{getLocalizedText(siteCopy.aboutEducation)}</EducationKicker>
-        <EducationList>
-          {education.map((item) => (
-            <EducationItem key={item.id} data-reveal>
-              <EducationPeriod>{getLocalizedText(item.period)}</EducationPeriod>
-              <EducationProgram>{getLocalizedText(item.program)}</EducationProgram>
-              <EducationPlace>{getLocalizedText(item.institution)}</EducationPlace>
-              <EducationLocation>{getLocalizedText(item.location)}</EducationLocation>
-            </EducationItem>
-          ))}
-        </EducationList>
       </ExperienceBlock>
 
       <ImpactBlock>

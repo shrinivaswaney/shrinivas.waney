@@ -619,50 +619,6 @@ const ReadMoreSpacer = styled.div`
   }
 `;
 
-const EducationKicker = styled.h4`
-  margin-top: 3.5rem;
-  margin-bottom: 1rem;
-  ${labelStyles}
-`;
-
-const EducationList = styled.ul`
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  border-top: 1px solid var(--color-line);
-  border-left: 1px solid var(--color-line);
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-`;
-
-const EducationItem = styled.li`
-  border-right: 1px solid var(--color-line);
-  border-bottom: 1px solid var(--color-line);
-  padding: 1.25rem;
-`;
-
-const EducationPeriod = styled.p`
-  ${labelStyles}
-`;
-
-const EducationProgram = styled.p`
-  ${headingStyles}
-  margin-top: 0.75rem;
-  font-size: 1.5rem;
-`;
-
-const EducationPlace = styled.p`
-  margin-top: 0.5rem;
-  font-size: 0.875rem;
-  color: color-mix(in oklab, var(--color-paper) 70%, transparent);
-`;
-
-const EducationLocation = styled.p`
-  font-size: 0.875rem;
-  color: color-mix(in oklab, var(--color-paper) 50%, transparent);
-`;
-
 const ImpactBlock = styled.div`
   border-top: 1px solid var(--color-line);
   padding: 4rem 1rem;
@@ -748,13 +704,6 @@ export {
   Chip,
   ChipRow,
   DownloadMeta,
-  EducationItem,
-  EducationKicker,
-  EducationList,
-  EducationLocation,
-  EducationPeriod,
-  EducationPlace,
-  EducationProgram,
   ExperienceBlock,
   ExperienceBody,
   ExperienceChip,
